@@ -16,12 +16,16 @@ services:
     env_file: .env
     volumes:
       - static_volume:/backend_static
+    depends_on:
+      - db
   frontend:
     image: wanech/taski_frontend  # Качаем с Docker Hub
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
+    depends_on:
+      - db
   gateway:
     image: wanech/taski_gateway  # Качаем с Docker Hub
     env_file: .env
